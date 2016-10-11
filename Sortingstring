@@ -1,0 +1,264 @@
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include<time.h>
+int compare (char * mas1,char *mas2,int size_1, int size_2 );// compare two strings. return 1 when first string > second string
+void bubblesort(char **a, int size); // sorting massive of strings
+void quicksort( char **s ,int size);
+void  insertsort(char **m, int size);  //ok
+void copyarray(char **a, int n,char **b);//from where
+void merge(char **a,int fir, char **b ,int sec,char **c); //merge two massive in third
+void mergesortRecursively(char ** a,char **b,int  n , int *whereis);
+void mergesort(char ** a,int n);
+
+
+int main(void)
+{	
+	FILE *fp;
+	char ch;
+	  
+	if( (fp=fopen("input.txt","r"))==NULL)
+	{
+		 printf("He удается открыть файл.\n");
+ 		 exit(1);
+	}
+	else printf("FILe is open\n");
+	int size =0;
+	fscanf(fp,"%d",&size); //ok
+	
+	int *quantity=(int*)malloc(sizeof(int)*size); 
+	int t = 0;
+	int i = 0;
+	ch =fgetc(fp);// '\n' 
+	while((ch=fgetc(fp))!=EOF)
+	{
+		t++;	
+		if (ch=='\n') 
+		{
+			quantity[i++]= t;
+			t = 0;
+		}	
+	}
+	fclose(fp);
+	 int  realsize= i;
+	int pos = 0;
+	char **strings =(char**)malloc(sizeof(char*)*(realsize));
+	
+	fp = fopen("input.txt","r");
+	fscanf(fp,"%d",&size); //ok
+	ch =fgetc(fp);// '\n'-symbol
+	
+	while(pos != realsize)
+	{ 
+		strings[pos] = (char*)malloc(sizeof(char)*(quantity[pos]));
+		fgets(strings[pos],quantity[pos]+2,fp);
+		pos++;	
+	}
+	
+	fclose(fp);
+	int choice=1;
+	printf("Choose algorithm of sorting");
+	printf("Bubblesort-1\nInsertsort-2\nQuicksort-3\nMergesort-4\n");
+	scanf("Your choice is=%d\n",&choice);
+	switch(choice)
+	{
+		case 1: bubblesort(strings,realsize);break;
+		case 2: insertsort(strings,realsize);break;
+		case 3 :quicksort(strings,realsize);break;
+		case 4 :mergesort(strings,realsize);break;
+		default:printf("wrong");break;
+	}
+mergesort(strings,realsize);
+		for (int h = 0 ;h != realsize;h++)
+ 	{ 
+ 		printf("%s", strings[h]);
+ 		free(strings[h]);
+ 	}
+ 	free(strings);
+	free(quantity);
+	
+	return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+void bubblesort(char **a, int size) // sorting massive of strings
+{   
+	int flag;
+	for(int i = 0; i != size; i++)
+	 	{ 
+	 		for(int j = 0 ; j != size-i-1; ++j) 
+	 		 { 
+	 		 	if( compare(a[j],a[j+1],strlen(a[j]),strlen(a[j+1]) ) )
+	 		  		{	
+	 		  			char *t = a[j];
+	 		  			a[j] = a[j+1]; 
+	 		  			a[j+1] = t;
+	 		 		 }		
+ 			 }
+	
+		}
+}
+
+void quicksort( char **s ,int size)
+{
+ 	srand(time(NULL));
+	 int p = rand()%size;
+	int l_pointer = 0;
+	int r_pointer = size;
+	char *x = s[ rand()%size];
+	while(l_pointer <= r_pointer)
+	{
+		while ( compare( s[p], s[l_pointer],strlen(s[p]),strlen(s[l_pointer]) ) ) ++l_pointer; 
+		while ( compare( s[r_pointer],s[p],strlen(s[r_pointer]), strlen(s[p]) ) ) --r_pointer;
+ 		if (l_pointer<=r_pointer)
+		{
+		 char *t = s[l_pointer];
+		 s[l_pointer] = s[r_pointer];
+		 s[r_pointer--] = t;
+		 l_pointer++;
+		}	
+	}
+	if(r_pointer > 0) quicksort(s,r_pointer);
+	if (l_pointer<size) quicksort(s+l_pointer,size-l_pointer);
+}
+
+void  insertsort(char **m, int size)  //ok
+{ for (int i = 1 ; i != size; ++i)     //            51242-->> 15242->> 12542
+	{
+		int j = i;
+		while((j> 0) && compare(m[j-1],m[j],strlen(m[j-1]),strlen(m[j]) ) ) 
+		{
+		char *t = m[j];
+	 	m[j] = m[j-1]; 
+	 	m[j-1] = t;
+		j--;
+		}
+	}	
+}
+
+
+
+void merge(char **a,int fir, char **b ,int sec,char **c) //merge two massive in third
+{ int l = 0;
+	int r = 0;
+	int i = 0;
+	while(l<fir&&r<sec)
+	{
+		if (compare(a[l],b[r],strlen(a[l]),strlen(b[r]))) {c[i] = b[r++];	}
+		else {c[i] =a[l++];}
+		i++;
+	}
+	while(l<fir) c[i++] =a[l++];
+	while(r<sec) c[i++] = b[r++];			
+	
+}
+int compare (char * mas1,char *mas2,int size_1, int size_2 )// compare two strings. return 1 when first string > second string
+{ 
+	int size = (size_1 > size_2)?size_2:size_1;
+	int i;
+	for (i = 0; i != size; ++i) 
+	 	{
+	 		if (mas1[i] > mas2[i]) 
+				{ 
+			
+				return 1;
+				}
+			else if (mas1[i]<mas2[i]) return 0;
+					
+						
+		}
+ 	return 0; //flag 
+
+}
+
+
+void mergesortRecursively(char ** a,char **b,int  n , int *whereis)
+{
+ *whereis = 0;// right now in massive a
+	if (n<2) return;
+	if (n == 2) if ( compare(a[0],a[1],strlen(a[0]),strlen(a[1]) ) )
+	{ 
+		//swap(&a[0],&a[1]);
+		char *t=a[0];
+		a[0]=a[1];
+		a[1]=t;
+		
+	}
+	 int middle = n/2;
+	 int res,res1;
+	 mergesortRecursively(a, b,middle,&res);
+	 mergesortRecursively(a+middle,b+middle,n-middle,&res1);
+	 if (res!=res1)
+	 {
+	 	if (res ==0) {copyarray(b+middle,n-middle,a+middle);}
+	 	else copyarray(a+middle,n-middle,b+middle);
+	 }
+/*	 (res==0)?merge(a,middle,a+middle,n-middle,b):	merge(b,middle,b+middle,n-middle,a);
+	 *whereis=0;*/
+	 if (res==0)  
+	 {
+	 	merge(a,middle,a+middle,n-middle,b);
+	 	*whereis = 1;
+	 }
+	 else
+	 {
+	 	merge(b,middle,b+middle,n-middle,a);
+	  *whereis=0;
+	 }
+
+}
+
+
+
+
+void mergesort(char ** a,int n)
+{
+	if  (n<=1) return;
+	if (n==2) 
+	{
+		if (compare(a[0],a[1],strlen(a[0]),strlen(a[1])))
+		{
+		 //swap(&a[0],&a[1]);
+		 char *t=a[0];
+		a[0]=a[1];
+		a[1]=t;
+		 }
+		return;
+	}
+	int where_m = 0;//  0== in massive a
+	char **b = (char**)malloc(sizeof(char*)*n);
+	mergesortRecursively(a,b,n,&where_m);
+	if (where_m!=0) copyarray(b,n,a); //(from,where)
+	free(b);
+
+
+
+
+
+}
+
+void copyarray(char **a, int n,char **b)//from where
+{
+ for (int i = 0; i != n;i++ )//? 
+  b[i] = a[i]; 	
+}
+
+void swap(char *a,char *b)
+{char *t =a;
+ a=b;
+ b=t;
+ }
