@@ -68,32 +68,15 @@ int main(void)
 		case 4 :mergesort(strings,realsize);break;
 		default:printf("wrong");break;
 	}
-mergesort(strings,realsize);
-		for (int h = 0 ;h != realsize;h++)
+	for (int h = 0 ;h != realsize;h++)
  	{ 
  		printf("%s", strings[h]);
  		free(strings[h]);
  	}
  	free(strings);
 	free(quantity);
-	
 	return 0;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 void bubblesort(char **a, int size) // sorting massive of strings
 {   
