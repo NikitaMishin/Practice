@@ -56,17 +56,24 @@ int main(void)
 	}
 	
 	fclose(fp);
-	int choice=1;
+	int choice;
 	printf("Choose algorithm of sorting\n");
-	printf("Bubblesort-1\nInsertsort-2\nQuicksort-3\nMergesort-4\n");
-	scanf("Your choice is=%d\n",&choice);
+	printf("Bubblesort-1\nInsertsort-2\nQuicksort-3\nMergesort-4\n	Your choice is=");
+	scanf("%d",&choice);
 	switch(choice)
 	{
-		case 1: bubblesort(strings,realsize);break;
-		case 2: insertsort(strings,realsize);break;
-		case 3 :quicksort(strings,realsize-1);break;
-		case 4 :mergesort(strings,realsize);break;
-		default:printf("wrong");break;
+		case 1:
+			 bubblesort(strings,realsize);break;
+		case 2:
+			 insertsort(strings,realsize);break;
+		case 3 :
+			quicksort(strings,realsize-1);break;
+		case 4 :
+			mergesort(strings,realsize);break;
+		default:
+			printf("wrong\nThen will be mergesort\n"); 
+			mergesort(strings,realsize);
+			break; //then will be merge sort
 	}
 	for (int h = 0 ;h != realsize;h++)
  	{ 
