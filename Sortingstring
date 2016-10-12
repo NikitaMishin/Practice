@@ -40,7 +40,7 @@ int main(void)
 	while((ch=fgetc(fp))!=EOF)
 	{
 		t++;	
-		if (ch=='\n') 
+		if ((ch=='\n')||(ch==EOF))
 		{
 			quantity[i++]= t;
 			t = 0;
