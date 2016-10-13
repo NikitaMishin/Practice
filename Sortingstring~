@@ -44,6 +44,7 @@ int main(void)
 		}	
 	}
 	if (sol!='\n'){ quantity[i++] = t;}  
+	printf("i=%d\n",i);
 	int realsize= i;
 	int pos = 0;
 	char **strings =(char**)malloc(sizeof(char*)*(realsize+1));
