@@ -1,13 +1,19 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include<time.h>
-
+#include <time.h>
+#include <comparer.h>
+//#include <swap.h>
+//#include <copyarray.h>
+//#include <bubblesort.h>
+//#include <insertsort.h>
+//#include <quicksort.h>
+//#include <mergesort>
 /*
 Sorting in 
 
 */
-int comparer (char *mas1, char* mas2);  //return 1 when mas1<mas2
+//int comparer (char *mas1, char* mas2);  //return 1 when mas1<mas2
 void swap(char **a,char **b);
 void bubblesort(char **a, int size); // sorting massive of strings
 void quicksort( char **s ,int size);
@@ -44,7 +50,6 @@ int main(void)
 		}	
 	}
 	if (sol!='\n'){ quantity[i++] = t;}  
-	printf("i=%d\n",i);
 	int realsize= i;
 	int pos = 0;
 	char **strings =(char**)malloc(sizeof(char*)*(realsize+1));
@@ -213,7 +218,7 @@ void swap(char **a,char **b)
   *a = *b;
   *b = t;
  }
- int comparer (char* mas1, char* mas2)  //return 1 when mas2<mas1
+/* int comparer (char* mas1, char* mas2)  //return 1 when mas2<mas1
 {	
 	int i = 0;
 	while((mas1[i] !='\0')&& (mas2[i]!='\0'))
