@@ -11,8 +11,9 @@ int main(void)
 	int p;
 for (int k=0;k<numb;k++)
 {
+
  long int size = rand()%30000+ 100;
- printf("=%ld=",size);
+
  char**strings= (char**)malloc(sizeof(char*)*size);
  int j;
  int z;
