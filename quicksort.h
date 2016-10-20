@@ -5,8 +5,8 @@
 
 //quicksort function sorting massive of strings
 
-void quicksort( char **s,  int size)
-{	
+void quicksort( char **s,  int size);
+/*{	
 		//srand(time(NULL));
 	int l_pointer = 0;			// pointer on first string
 	int r_pointer = size; // pointer on last string
@@ -23,5 +23,5 @@ void quicksort( char **s,  int size)
 	}
 	if(r_pointer > 0) quicksort(s, r_pointer);
 	if (l_pointer<size) quicksort(s+l_pointer,size-l_pointer);
-}
+}*/
 
