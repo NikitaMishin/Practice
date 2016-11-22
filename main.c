@@ -7,21 +7,24 @@
 #include "quicksort.h"
 #include "mergesort.h"
 
-int main()
+int main( int argc, char**argv)
 {	
+  if(argc != 3)
+  {
+    printf("Wrong input");
+    exit(1);
+  }
 	FILE *fp;
-	if ( (fp = fopen("input.txt","r") ) == NULL)
+	if ( (fp = fopen(argv[2],"r") ) == NULL)
 	{
 		 printf ("He удается открыть файл.\n");
  		 exit(1);
 	}
-	else printf ("FILE is open\n");
-	int size; 
-	fscanf(fp,"%d",&size);  
+	int size = atoi(argv[1]);  
 	int *quantity=(int*)malloc(sizeof(int)*size);// allocation memory for  massive of sizes of strings 
 	int t = 0; // quantity of characters in string
 	int i = 0; //quantity strings
-	int ch = fgetc(fp);// '\n'-char
+	int ch ;
 	int check = EOF;
 	while((ch = fgetc(fp))!=EOF)
 	{	
@@ -43,8 +46,6 @@ int main()
 	char **strings =(char**)malloc(sizeof(char*)*(realsize+1));
 	
 	rewind(fp);
-	fscanf(fp,"%d",&size); //ok
-	ch = fgetc(fp); // '\n'-symbol char
 	while(pos != realsize)
 	{ int k;
 		strings[pos] = (char*)malloc(sizeof(char)*(quantity[pos]));
