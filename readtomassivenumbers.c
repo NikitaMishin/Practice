@@ -4,14 +4,15 @@
 
 
 
-void set_quantity_of_numbers_strings (FILE *fp, int size, int *quantity)
+void set_quantity_of_numbers_strings (FILE *fp, int *size, int *quantity)
 {
 	int t = 0; 
 	// quantity of characters in string
 	int i = 0; //quantity strings
 	int ch ;
 	int check = EOF;
-	while( ((ch = fgetc(fp))!=EOF) &&i < size)
+	int realsize = *size; 
+	while( ((ch = fgetc(fp))!=EOF) && i < realsize)
 	{	
 		check = ch;
 		t++;	
@@ -25,5 +26,5 @@ void set_quantity_of_numbers_strings (FILE *fp, int size, int *quantity)
 	{ 
 		quantity[i++] = t;
 	}
-	size = i; 
+	*size = i; 
 }

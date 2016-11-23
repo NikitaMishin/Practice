@@ -2,7 +2,6 @@
 #include <stdio.h>
 #include "setstrings.h"
 
-
 void set_strings (FILE *fp,char** strings, int  size ,int *quantity)
 {
   int pos;
