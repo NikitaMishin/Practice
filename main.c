@@ -9,6 +9,7 @@
 
 int main( int argc, char**argv)
 {	
+
   if(argc != 3)
   {
     printf("Wrong input");
@@ -21,12 +22,14 @@ int main( int argc, char**argv)
  		 exit(1);
 	}
 	int size = atoi(argv[1]);  
-	int *quantity=(int*)malloc(sizeof(int)*size);// allocation memory for  massive of sizes of strings 
-	int t = 0; // quantity of characters in string
+	int *quantity=(int*)malloc(sizeof(int)*size);
+	// allocation memory for  massive of sizes of strings 
+	int t = 0; 
+	// quantity of characters in string
 	int i = 0; //quantity strings
 	int ch ;
 	int check = EOF;
-	while((ch = fgetc(fp))!=EOF)
+	while( ((ch = fgetc(fp))!=EOF) &&i < size)
 	{	
 		check = ch;
 		t++;	
@@ -39,17 +42,15 @@ int main( int argc, char**argv)
 	if (check != '\n')
 	{ 
 		quantity[i++] = t;
-	}
-	  
+	} 
 	int realsize= i;
 	int pos = 0;
 	char **strings =(char**)malloc(sizeof(char*)*(realsize+1));
-	
 	rewind(fp);
 	while(pos != realsize)
 	{ int k;
 		strings[pos] = (char*)malloc(sizeof(char)*(quantity[pos]));
-		for(k=0;k!=quantity[pos]-1;++k)
+		for(k = 0;k != quantity[pos]-1;++k)
 		{
 			strings[pos][k]=fgetc(fp);
 	 	}
@@ -57,35 +58,13 @@ int main( int argc, char**argv)
 		strings[pos][k]='\0';
 		pos++;
 	}
-	
 	fclose(fp);
-	int choice;
-	printf("Choose algorithm of sorting\n");
-	printf("Bubblesort-1\nInsertsort-2\nQuicksort-3\nMergesort-4\n	Your choice is=");
-	scanf("%d",&choice);
-	
-	switch(choice)
-	{
-		case 1:
-			 bubblesort(strings,realsize);break;
-		case 2:
-			 insertsort(strings,realsize);break;
-		case 3 :
-			quicksort(strings,realsize-1);break;
-		case 4 :
-			mergesort(strings,realsize);break;
-		default:
-			printf("wrong\nThen will be 4\n"); 
-			mergesort(strings,realsize);
-			break; //then will be merge sort
-	}
-	
+	mergesort(strings,realsize);
 	for (int h = 0 ;h != realsize;h++)
  	{ 
  		printf("%s\n", strings[h]);
  		free(strings[h]);
  	}
- 	
  	free(strings);
 	free(quantity);
 	return 0;
