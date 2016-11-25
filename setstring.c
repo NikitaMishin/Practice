@@ -4,7 +4,7 @@
 
 void set_strings (FILE *fp,char** strings, int  size ,int *quantity)
 {
-  int pos;
+  int pos = 0 ;
   int ch;
 	while(pos != size)
 	{ 

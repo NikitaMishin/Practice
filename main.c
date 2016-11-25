@@ -19,7 +19,7 @@ int main( int argc, char**argv)
 	FILE *fp;
 	if ( (fp = fopen(argv[2],"r") ) == NULL)
 	{
-		 printf ("He удается открыть файл.\n");
+		 printf ("Can't open the file.\n");
  		 exit(1);
 	}
 	int size = atoi(argv[1]);  
