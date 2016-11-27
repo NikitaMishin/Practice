@@ -8,7 +8,7 @@
   int i = 0;
   int f = 0;
   int s = 0;
-  while((mas1[i] !='\0')&& (mas2[i]!='\0'))
+  while ((mas1[i] !='\0')&&(mas2[i]!='\0'))
   {	
     f = mas1[i];
     s = mas2[i++];
