@@ -1,5 +1,9 @@
 # Practice
 
+Program implements various sorting algorithms for the case of string sorting.
+
+Below are the results of profiling:
+
 Gprof and VALGRIND
 
 |)(input1.txt strings 4818331 400-600 symbols)
